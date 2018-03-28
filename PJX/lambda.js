@@ -18,9 +18,9 @@ exports.handler = function (event, context, callback) {
 			proxyResponse.statusCode = response.statusCode;
 			proxyResponse.body = body;
 			proxyResponse.headers = response.headers;
-			callback(null, response);
+			callback(null, proxyResponse);
 		}else{
-			console.log(error);
+			//console.log(error);
 			proxyResponse.body =error;
 			callback(response, null);
 		}
