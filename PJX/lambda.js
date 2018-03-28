@@ -2,9 +2,10 @@ let AWS = require('aws-sdk');
 let request = require('request');
 exports.handler = function (event, context, callback) {
 	let proxyResponse = {
+		 isBase64Encoded: false,
 		statusCode: 200,
 		headers: {
-			"x-custom-header": "my custom header value"
+			
 		},
 		body: ''
 	};
@@ -19,6 +20,7 @@ exports.handler = function (event, context, callback) {
 			proxyResponse.headers = response.headers;
 			callback(null, response);
 		}else{
+			console.log(error);
 			proxyResponse.body =error;
 			callback(response, null);
 		}
