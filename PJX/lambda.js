@@ -14,7 +14,8 @@ exports.handler = function (event, context, callback) {
 	};
 	request(event.queryStringParameters.url, function (error, response, body) {
 		proxyResponse.statusCode = response.statusCode;
-		response.body = body;
+		proxyResponse.body = body;
+		proxyResponse.headers=response.headers;
 		callback(null, response);
 	});
 }
