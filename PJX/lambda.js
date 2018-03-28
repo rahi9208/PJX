@@ -13,9 +13,14 @@ exports.handler = function (event, context, callback) {
 		headers: event.headers
 	};
 	request(event.queryStringParameters.url, function (error, response, body) {
-		proxyResponse.statusCode = response.statusCode;
-		proxyResponse.body = body;
-		proxyResponse.headers=response.headers;
-		callback(null, response);
+		if (!error) {
+			proxyResponse.statusCode = response.statusCode;
+			proxyResponse.body = body;
+			proxyResponse.headers = response.headers;
+			callback(null, response);
+		}else{
+			proxyResponse.body =error;
+			callback(response, null);
+		}
 	});
 }
